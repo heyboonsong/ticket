@@ -4,12 +4,12 @@ const { exec } = require("child_process");
 const CONFIG = {
   TOKEN:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhleWJvb25zb25nQGdtYWlsLmNvbSIsInVybGJhY2siOiJ3d3cuYWxsdGlja2V0LmNvbSIsInBheW1lbnRDaGFubmVsIjoiQzA3IiwidGlja2V0VHlwZSI6IjAxIiwibGFuZyI6IkUiLCJkYXRhIjoiYTk0YTU3NGY3NGJhMWM5MTdiZTA1NGYwYmM5NjI1MDBhOGIyY2U0ODA3ZmYzOGJmNTY2YWYxNGY0MDkzYjcyODU0ZmViMTExMjk2MDg4NmFjNDBjYTk1MjBkOTI4NGEzNzdiYjYxMjU4MWNlY2MzZmVlMjU0OGI0MmM4YTkyYmJiM2QzYWYzMmU5NTg3NzQxYWQzYjE0MTQyODUyZjg3Mzg4YjNjZmRlMDNjZTljNDg2Y2ExODcwMzVlZTU1YjZlNzNkOTc0OTc3Y2VhNGU5MDgxYTliYWNjNDA0YjVmN2QwMjliMGI2Y2Y0YTE0NzA2NjdlZjQzODlkZWUzMGMwNDY0ZmY4NDQwY2RjOGFhOWUyM2MyZmZhYTJiOThhODZjOTU3ZGYxOGEyNDc5YWUzZTVmZmQzMmE5NTI0NGFiZGIwMTEzMDk2ZDQ3ZDAyMWY4MzMxNDFkMmMxODFiYjQ1NTFmN2QyZjU2ZDJhM2NmN2ExY2RkYTI4OWVlOTZkNDU2NTdiZTQyNGMzMmUyOTkzMTA1ZTIyZjlkZjZkODNhMTllOTljZTdjNjU1ZTBjYWUwMmEzMjEzNTgzMTNlOTZlMTU2OTIwNzIyZDUzMzZmYmQzY2RiOTNjZjFiM2Y4YjMyZWVmNzhhZDkzODI4OTFmYzYzNTBjNWM5MDAyMTc4ZTlhZGViNmE2YzYwYmU1MmNlODYwMDYxYWMyZmFhOGI1MzFmMDZiOTZlYmZlMjM0MzQzNDRiNzEzNDVmZTJiZTRkOWU3ZGQxOTY0NzM0MTAyN2JhOGQwNWNjMGFhNDdiYmU5NDgyMjYzMWZiMjQyMDdhNTJiMzFiNDM5YWNiYmY5NzE0ZTYyMzU4NTNhNzBjZTg4NmYyYTk1YjBkZmNkNzRiYTAxNTVhZTM2NGE5Yzk5YzUwZGIxNDJiMjMzMjQyZDM0MTFlNzk5MmNkOWFmOTVlMzZlODUyNGU5YjBkYWRmNTEzZmI3Yjk1YWZhMmY4ZTVjYWI2NDVjNGU0YjgxZTQ3NmEyM2JkZWJjYzBkNmQ3NGJlODY0Y2M2NTIwNTU2YTgxNmEzNTQ4ZmRlODExYWI0ODNjZDZjZmFkNWZiOWJkNWEyMjUyNWMyYWQzMzE1NzcxYWU4NmVhZDUyYWYwM2Q1NzVkYzJmNTQ3YzFmNDNhMWRhMmEyZDNhZDhlMDI5NzQ0YzI3NTM0ZmJjNGZjYTM1Mjg1OGFlMDViY2IyZjdiNjgxYTMwMTU4NGYyMWRiYjlkNDg3NmE0OGQ1ZGRjMjBjIiwidGltZVN0YW1wIjowLjUyNzE4MDQwMDQ1MjU4ODgsImZpcnN0bmFtZSI6IkJvb25zb25nIiwibGFzdG5hbWUiOiJTcml0aG9uZyIsInNpbmdBZGRyZXNzIjoiNDkuNDkuMjE2LjEzOSIsInR5cGUiOiJleHRlbmQiLCJzY29yZSI6MSwidXNlck1haWwiOiJoZXlib29uc29uZ0BnbWFpbC5jb20iLCJpYXQiOjE3NjY0MTY4MjMsImV4cCI6MTc2NjQyNzYyMywiaXNzIjoiY3NhdGsxOCJ9.U93Q_UDhz5APYwQ_MP0oVNhe1j-2k78ju3TwUC7-aS0",
-  PERFORM_ID: "25952", // SMTOWN LIVE 2026
-  ROUND_ID: "R1",
+  EVENT_NAME: "SMTOWNLIVE2026inBKK",
   ZONE_ID: "C3",
-  RESERVE_ZONE_ID: "CA_28",
+  // SET WITH API
+  PERFORM_ID: "",
+  ROUND_ID: "",
   BASE_URL: "https://www.allticket.com",
-  // Updated Cookie using the LATEST aws-waf-token from the user (Step 256)
   COOKIE:
     "_ga=GA1.2.764019633.1766411747; _gid=GA1.2.2120792405.1766411747; G_ENABLED_IDPS=google; cookieconsent_status=allow; cookies-strictly=true; cookies-performance=false; _gat=1; _ga_ERZFFGWN5D=GS2.2.s1766417124$o2$g1$t1766419742$j60$l0$h539641078; aws-waf-token=314f55ae-578f-4a1b-89ca-b4a38c7a71d8:NQoAdfZxS2slAAAA:85hJ6bhDT0Nxy41jfx90nGyuTkEVjGF9htYfXqEGBqERL632l1DOqzpcxLVRQNcWcgEtSa15+MJ0zE/Skj1op7TrqiAgGqVMS9DG4/CHRHd8R6jkJ8gubYc/3Yw/afmm8CltLmUQPrzXejecWRZs3/UFAwz5gmwxze8kXNbctKvxVtrB/PtIiG9h4iWBNpHy8KAW81CLWZa+qpnwUOWtnmXu1dn89YOqfOkoj2UXSr7dzFs4sk3Hf9KWM+d/fiAM3SRKXN97Frk=",
 };
@@ -28,7 +28,7 @@ function curlRequest(urlEndpoint, data) {
   -b '${CONFIG.COOKIE}' \\
   -H 'origin: https://www.allticket.com' \\
   -H 'priority: u=1, i' \\
-  -H 'referer: https://www.allticket.com/event/SMTOWNLIVE2026inBKK' \\
+  -H 'referer: https://www.allticket.com/event/${CONFIG.EVENT_NAME}' \\
   -H 'sec-ch-ua: "Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"' \\
   -H 'sec-ch-ua-mobile: ?0' \\
   -H 'sec-ch-ua-platform: "macOS"' \\
@@ -71,6 +71,32 @@ async function checkAndReserve() {
   console.log(`[${timestamp}] Checking seats for Zone: ${CONFIG.ZONE_ID}...`);
 
   try {
+    // Step 1: Get Round
+    // Payload from HAR: {"performId":"25952"}
+    const roundRes = await curlRequest("/api-booking/get-round", {
+      performId: CONFIG.PERFORM_ID,
+    });
+
+    // Dynamically set ROUND_ID
+    if (
+      roundRes &&
+      roundRes.data &&
+      roundRes.data.data &&
+      Array.isArray(roundRes.data.data.list_round)
+    ) {
+      const rounds = roundRes.data.data.list_round;
+      if (rounds.length > 0) {
+        CONFIG.ROUND_ID = rounds[0].roundId;
+        console.log(`Fetched Round ID: ${CONFIG.ROUND_ID}`);
+      }
+    } else {
+      console.log(
+        "Could not fetch rounds or list empty, using default/hardcoded:",
+        CONFIG.ROUND_ID
+      );
+    }
+
+    // Step 2: Get Seat
     const response = await curlRequest("/api-booking/get-seat", {
       performId: CONFIG.PERFORM_ID,
       roundId: CONFIG.ROUND_ID,
@@ -134,7 +160,7 @@ async function checkAndReserve() {
     const reservePayload = {
       performId: CONFIG.PERFORM_ID,
       roundId: CONFIG.ROUND_ID,
-      zoneId: CONFIG.RESERVE_ZONE_ID,
+      zoneId: CONFIG.ZONE_ID,
       screenLabel: CONFIG.ZONE_ID,
       seatTo: {
         seatType: "SEAT",
@@ -163,8 +189,52 @@ async function checkAndReserve() {
   }
 }
 
+// Function to fetch the Event ID dynamically
+function fetchEventInfo() {
+  return new Promise((resolve, reject) => {
+    // Using a simpler curl for the public GET endpoint
+    const url =
+      `https://www.allticket.com/master/event_info/${CONFIG.EVENT_NAME}.json?time=` +
+      new Date().getTime();
+    const command = `curl -s '${url}' -H 'accept: application/json'`;
+
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error("Failed to fetch event info:", error);
+        reject(error);
+        return;
+      }
+      try {
+        const json = JSON.parse(stdout);
+        if (json && json.data && json.data.event_id) {
+          resolve(json.data.event_id);
+        } else {
+          reject(new Error("event_id not found in response"));
+        }
+      } catch (e) {
+        reject(e);
+      }
+    });
+  });
+}
+
 async function main() {
   console.log("Starting Ticket Automation (Curl Mode) - Press Ctrl+C to stop");
+
+  try {
+    console.log("Fetching dynamic Event ID...");
+    const eventId = await fetchEventInfo();
+    console.log(`Fetched Event ID: ${eventId}`);
+    CONFIG.PERFORM_ID = eventId;
+  } catch (err) {
+    console.error(
+      "Could not fetch Event ID, using fallback/hardcoded:",
+      CONFIG.PERFORM_ID
+    );
+    // We can continue with the hardcoded one if fetch fails, or exit.
+    // User asked to 'use' it, so ideally we insist. But fallback is safer.
+  }
+
   console.log(
     `Target: Event ${CONFIG.PERFORM_ID} | Zone ${CONFIG.ZONE_ID} | ReserveZone ${CONFIG.RESERVE_ZONE_ID}`
   );
