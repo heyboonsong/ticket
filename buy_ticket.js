@@ -1,0 +1,184 @@
+const { exec } = require("child_process");
+
+// --- Configuration ---
+const CONFIG = {
+  TOKEN:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhleWJvb25zb25nQGdtYWlsLmNvbSIsInVybGJhY2siOiJ3d3cuYWxsdGlja2V0LmNvbSIsInBheW1lbnRDaGFubmVsIjoiQzA3IiwidGlja2V0VHlwZSI6IjAxIiwibGFuZyI6IkUiLCJkYXRhIjoiYTk0YTU3NGY3NGJhMWM5MTdiZTA1NGYwYmM5NjI1MDBhOGIyY2U0ODA3ZmYzOGJmNTY2YWYxNGY0MDkzYjcyODU0ZmViMTExMjk2MDg4NmFjNDBjYTk1MjBkOTI4NGEzNzdiYjYxMjU4MWNlY2MzZmVlMjU0OGI0MmM4YTkyYmJiM2QzYWYzMmU5NTg3NzQxYWQzYjE0MTQyODUyZjg3Mzg4YjNjZmRlMDNjZTljNDg2Y2ExODcwMzVlZTU1YjZlNzNkOTc0OTc3Y2VhNGU5MDgxYTliYWNjNDA0YjVmN2QwMjliMGI2Y2Y0YTE0NzA2NjdlZjQzODlkZWUzMGMwNDY0ZmY4NDQwY2RjOGFhOWUyM2MyZmZhYTJiOThhODZjOTU3ZGYxOGEyNDc5YWUzZTVmZmQzMmE5NTI0NGFiZGIwMTEzMDk2ZDQ3ZDAyMWY4MzMxNDFkMmMxODFiYjQ1NTFmN2QyZjU2ZDJhM2NmN2ExY2RkYTI4OWVlOTZkNDU2NTdiZTQyNGMzMmUyOTkzMTA1ZTIyZjlkZjZkODNhMTllOTljZTdjNjU1ZTBjYWUwMmEzMjEzNTgzMTNlOTZlMTU2OTIwNzIyZDUzMzZmYmQzY2RiOTNjZjFiM2Y4YjMyZWVmNzhhZDkzODI4OTFmYzYzNTBjNWM5MDAyMTc4ZTlhZGViNmE2YzYwYmU1MmNlODYwMDYxYWMyZmFhOGI1MzFmMDZiOTZlYmZlMjM0MzQzNDRiNzEzNDVmZTJiZTRkOWU3ZGQxOTY0NzM0MTAyN2JhOGQwNWNjMGFhNDdiYmU5NDgyMjYzMWZiMjQyMDdhNTJiMzFiNDM5YWNiYmY5NzE0ZTYyMzU4NTNhNzBjZTg4NmYyYTk1YjBkZmNkNzRiYTAxNTVhZTM2NGE5Yzk5YzUwZGIxNDJiMjMzMjQyZDM0MTFlNzk5MmNkOWFmOTVlMzZlODUyNGU5YjBkYWRmNTEzZmI3Yjk1YWZhMmY4ZTVjYWI2NDVjNGU0YjgxZTQ3NmEyM2JkZWJjYzBkNmQ3NGJlODY0Y2M2NTIwNTU2YTgxNmEzNTQ4ZmRlODExYWI0ODNjZDZjZmFkNWZiOWJkNWEyMjUyNWMyYWQzMzE1NzcxYWU4NmVhZDUyYWYwM2Q1NzVkYzJmNTQ3YzFmNDNhMWRhMmEyZDNhZDhlMDI5NzQ0YzI3NTM0ZmJjNGZjYTM1Mjg1OGFlMDViY2IyZjdiNjgxYTMwMTU4NGYyMWRiYjlkNDg3NmE0OGQ1ZGRjMjBjIiwidGltZVN0YW1wIjowLjUyNzE4MDQwMDQ1MjU4ODgsImZpcnN0bmFtZSI6IkJvb25zb25nIiwibGFzdG5hbWUiOiJTcml0aG9uZyIsInNpbmdBZGRyZXNzIjoiNDkuNDkuMjE2LjEzOSIsInR5cGUiOiJleHRlbmQiLCJzY29yZSI6MSwidXNlck1haWwiOiJoZXlib29uc29uZ0BnbWFpbC5jb20iLCJpYXQiOjE3NjY0MTY4MjMsImV4cCI6MTc2NjQyNzYyMywiaXNzIjoiY3NhdGsxOCJ9.U93Q_UDhz5APYwQ_MP0oVNhe1j-2k78ju3TwUC7-aS0",
+  PERFORM_ID: "25952", // SMTOWN LIVE 2026
+  ROUND_ID: "R1",
+  ZONE_ID: "C3",
+  RESERVE_ZONE_ID: "CA_28",
+  BASE_URL: "https://www.allticket.com",
+  // Updated Cookie using the LATEST aws-waf-token from the user (Step 256)
+  COOKIE:
+    "_ga=GA1.2.764019633.1766411747; _gid=GA1.2.2120792405.1766411747; G_ENABLED_IDPS=google; cookieconsent_status=allow; cookies-strictly=true; cookies-performance=false; _gat=1; _ga_ERZFFGWN5D=GS2.2.s1766417124$o2$g1$t1766419742$j60$l0$h539641078; aws-waf-token=314f55ae-578f-4a1b-89ca-b4a38c7a71d8:NQoAdfZxS2slAAAA:85hJ6bhDT0Nxy41jfx90nGyuTkEVjGF9htYfXqEGBqERL632l1DOqzpcxLVRQNcWcgEtSa15+MJ0zE/Skj1op7TrqiAgGqVMS9DG4/CHRHd8R6jkJ8gubYc/3Yw/afmm8CltLmUQPrzXejecWRZs3/UFAwz5gmwxze8kXNbctKvxVtrB/PtIiG9h4iWBNpHy8KAW81CLWZa+qpnwUOWtnmXu1dn89YOqfOkoj2UXSr7dzFs4sk3Hf9KWM+d/fiAM3SRKXN97Frk=",
+};
+
+// Function to execute curl command matching the user's successful one
+function curlRequest(urlEndpoint, data) {
+  return new Promise((resolve, reject) => {
+    const jsonData = JSON.stringify(data).replace(/"/g, '\\"'); // Escape quotes
+
+    // Removed --silent to see errors if any
+    const command = `curl '${CONFIG.BASE_URL}${urlEndpoint}' \\
+  -H 'accept: application/json, text/plain, */*' \\
+  -H 'accept-language: en-US,en;q=0.9,th;q=0.8' \\
+  -H 'authorization: ${CONFIG.TOKEN}' \\
+  -H 'content-type: application/json' \\
+  -b '${CONFIG.COOKIE}' \\
+  -H 'origin: https://www.allticket.com' \\
+  -H 'priority: u=1, i' \\
+  -H 'referer: https://www.allticket.com/event/SMTOWNLIVE2026inBKK' \\
+  -H 'sec-ch-ua: "Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"' \\
+  -H 'sec-ch-ua-mobile: ?0' \\
+  -H 'sec-ch-ua-platform: "macOS"' \\
+  -H 'sec-fetch-dest: empty' \\
+  -H 'sec-fetch-mode: cors' \\
+  -H 'sec-fetch-site: same-origin' \\
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36' \\
+  --data-raw "${jsonData}"`;
+
+    exec(command, { maxBuffer: 1024 * 1024 * 10 }, (error, stdout, stderr) => {
+      if (error) {
+        console.error("Curl Exec Error:", error.message);
+        reject(error);
+        return;
+      }
+      try {
+        if (!stdout || !stdout.trim()) {
+          // Log stderr to see why it's empty
+          console.log(`[Curl] Empty response. Stderr: ${stderr || "None"}`);
+          resolve({ data: {} });
+        } else {
+          const json = JSON.parse(stdout);
+          resolve({ data: json });
+        }
+      } catch (e) {
+        // Not JSON?
+        if (stdout.includes("AccessDenied") || stdout.includes("403")) {
+          console.log("[Curl] WAF Blocked (AccessDenied/403)");
+        } else {
+          console.log("Failed to parse JSON:", stdout.substring(0, 100));
+        }
+        reject(e);
+      }
+    });
+  });
+}
+
+async function checkAndReserve() {
+  const timestamp = new Date().toLocaleTimeString();
+  console.log(`[${timestamp}] Checking seats for Zone: ${CONFIG.ZONE_ID}...`);
+
+  try {
+    const response = await curlRequest("/api-booking/get-seat", {
+      performId: CONFIG.PERFORM_ID,
+      roundId: CONFIG.ROUND_ID,
+      zoneId: CONFIG.ZONE_ID,
+    });
+
+    // Explicitly verify response structure
+    const seatData = response && response.data ? response.data : {};
+
+    // Check top-level success.
+    if (!seatData) {
+      console.log("Empty or invalid response object.");
+      return false;
+    }
+
+    const innerData = seatData.data || {};
+    const seatsAvailable = innerData.seats_available || [];
+
+    if (!seatsAvailable || seatsAvailable.length === 0) {
+      console.log(
+        `[${timestamp}] No free seats found (seats_available empty). Retrying...`
+      );
+      return false;
+    }
+
+    // Flatten all seats from all available zones/sections
+    let allSeats = [];
+    seatsAvailable.forEach((section) => {
+      if (section.seat && Array.isArray(section.seat)) {
+        allSeats = allSeats.concat(section.seat);
+      }
+    });
+
+    if (allSeats.length === 0) {
+      console.log(
+        `[${timestamp}] Structure found but 'seat' array is empty. Retrying...`
+      );
+      return false;
+    }
+
+    // Check availability.
+    // Status "A" means Available.
+    const availableSeats = allSeats.filter((s) => s.status === "A");
+
+    if (availableSeats.length === 0) {
+      console.log(
+        `[${timestamp}] Seats loaded but none are 'A' (Available). Retrying...`
+      );
+      return false;
+    }
+
+    console.log(`\n!!! FOUND ${availableSeats.length} AVAILABLE SEATS !!!`);
+    const selectedSeat = availableSeats[0];
+    const selectedSeatNo = selectedSeat.seatNo;
+    console.log(
+      `Selected Seat: ${selectedSeatNo} (Row: ${selectedSeat.rowNo}, Col: ${selectedSeat.colNo})`
+    );
+
+    // Reserve Seat
+    console.log("Attempting reservation...");
+    const reservePayload = {
+      performId: CONFIG.PERFORM_ID,
+      roundId: CONFIG.ROUND_ID,
+      zoneId: CONFIG.RESERVE_ZONE_ID,
+      screenLabel: CONFIG.ZONE_ID,
+      seatTo: {
+        seatType: "SEAT",
+        seats: [selectedSeatNo],
+      },
+      shirtTo: [],
+    };
+
+    const reserveRes = await curlRequest(
+      "/api-booking/handler-reserve",
+      reservePayload
+    );
+    const reserveData = reserveRes.data;
+
+    // Check reservation response
+    if (reserveData && reserveData.success === false) {
+      console.error("Reservation Failed:", reserveData);
+      return false;
+    }
+
+    console.log("Reservation Response:", reserveData);
+    return false;
+  } catch (error) {
+    console.error(`[${timestamp}] Error: ${error.message}`);
+    return false;
+  }
+}
+
+async function main() {
+  console.log("Starting Ticket Automation (Curl Mode) - Press Ctrl+C to stop");
+  console.log(
+    `Target: Event ${CONFIG.PERFORM_ID} | Zone ${CONFIG.ZONE_ID} | ReserveZone ${CONFIG.RESERVE_ZONE_ID}`
+  );
+
+  while (true) {
+    const success = await checkAndReserve();
+    if (success) {
+      console.log("Exiting automation loop (Success).");
+      break;
+    }
+
+    // Polling interval
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+  }
+}
+
+main();

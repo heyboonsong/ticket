@@ -1,0 +1,12 @@
+{
+  "name": "ticket-automation",
+  "version": "1.0.0",
+  "description": "Automation bot for AllTicket",
+  "main": "buy_ticket.js",
+  "scripts": {
+    "start": "node buy_ticket.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
