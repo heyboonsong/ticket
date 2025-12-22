@@ -7,8 +7,8 @@ const CONFIG = {
   EVENT_NAME: "SMTOWNLIVE2026inBKK",
   ZONE_ID: "A2",
   // SET WITH API
-  PERFORM_ID: "25952",
-  ROUND_ID: "R1",
+  PERFORM_ID: "",
+  ROUND_ID: "",
   BASE_URL: "https://www.allticket.com",
   COOKIE:
     "_ga=GA1.2.764019633.1766411747; _gid=GA1.2.2120792405.1766411747; G_ENABLED_IDPS=google; cookieconsent_status=allow; cookies-strictly=true; cookies-performance=false; aws-waf-token=314f55ae-578f-4a1b-89ca-b4a38c7a71d8:NQoAfON2oDtMAAAA:gl8vaths6tvgn49Aq+Sc43Ngkxa5B/LRBG+iJQY0EncrfmxaTV+DKs4TZDZJYuzydAxODadpZAoCUT447ZHdb4Mz12uH7o6luZ3wo1dNGQ2CZqIBiT2/nRCFww3p52GRXpCCueADNjO6C/hycnhGrrCDbUsVgujjjCRHOVJgmtQW1CqZ6lC2Haopg4YSCIZCHtHalOAHMth/6jTOFJq1bwNBxXPIB+hIWnD0osESl6+PqVWqjHKkrZow5flexpiXtjVG3iMmqHLrjvM3n+zWvcPyFLUVzw==; _gat=1; _ga_ERZFFGWN5D=GS2.2.s1766417124$o2$g1$t1766422653$j52$l0$h539641078",
