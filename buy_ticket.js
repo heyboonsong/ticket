@@ -1,7 +1,6 @@
 const { exec } = require("child_process");
 const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
-const { error } = require("console");
 
 // --- Configuration ---
 const CONFIG = {
@@ -10,7 +9,7 @@ const CONFIG = {
   TOKEN:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhleWJvb25zb25nQGdtYWlsLmNvbSIsInVybGJhY2siOiJ3d3cuYWxsdGlja2V0LmNvbSIsInBheW1lbnRDaGFubmVsIjoiQzA3IiwidGlja2V0VHlwZSI6IjAxIiwibGFuZyI6IkUiLCJkYXRhIjoiYTk0YTU3NGY3NGJhMWM5MTdiZTA1NGYwYmM5NjI1MDBhOGIyY2U0ODA3ZmYzOGJmNTY2YWYxNGY0MDkzYjcyODU0ZmViMTExMjk2MDg4NmFjNDBjYTk1MjBkOTI4NGEzNzdiYjYxMjU4MWNlY2MzZmVlMjU0OGI0MmM4YTkyYmJiM2QzYWYzMmU5NTg3NzQxYWQzYjE0MTQyODUyZjg3Mzg4YjNjZmRlMDNjZTljNDg2Y2ExODcwMzVlZTU1YjZlNzNkOTc0OTc3Y2VhNGU5MDgxYTliYWNjNDA0YjVmN2QwMjliMGI2Y2Y0YTE0NzA2NjdlZjQzODlkZWUzMGMwNDY0ZmY4NDQwY2RjOGFhOWUyM2MyZmZhYTJiOThhODZjOTU3ZGYxOGEyNDc5YWUzZTVmZmQzMmE5NTI0NGFiZGIwMTEzMDk2ZDQ3ZDAyMWY4MzMxNDFkMmMxODFiYjQ1NTFmN2QyZjU2ZDJhM2NmN2ExY2RkYTI4OWVlOTZkNDU2NTdiZTQyNGMzMmUyOTkzMTA1ZTIyZjlkZjZkODNhMTllOTljZTdjNjU1ZTBjYWUwMmEzMjEzNTgzMTNlOTZlMTU2OTIwNzIyZDUzMzZmYmQzY2RiOTNjZjFiM2Y4YjMyZWVmNzhhZDkzODI4OTFmYzYzNTBjNWM5MDAyMTc4ZTlhZGViNmE2YzYwYmU1MmNlODYwMDYxYWMyZmFhOGI1MzFmMDZiOTZlYmZlMjM0MzQzNDRiNzEzNDVmZTJiZTRkOWU3ZGQxOTY0NzM0MTAyN2JhOGQwNWNjMGFhNDdiYmU5NDgyMjYzMWZiMjQyMDdhNTJiMzFiNDM5YWNiYmY5NzE0ZTYyMzU4NTNhNzBjZTg4NmYyYTk1YjBkZmNkNzRiYTAxNTVhZTM2NGE5Yzk5YzUwZGIxNDJiMjMzMjQyZDM0MTFlNzk5MmNkOWFmOTVlMzZlODUyNGU5YjBkYWRmNTEzZmI3Yjk1YWZhMmY4ZTVjYWI2NDVjNGU0YjgxZTQ3NmEzZGVjMTJkZDQ0NmFlNjVlZDZjZmFlNWQ0NTA0NzkwMWI2YzE4Yjc3N2ExNzU4OWZhNWZkYTE3NzNmZDQ5YTAxMGFjY2NhODY3ZGJhOTJkMDRlMzQxODliMWM1ODk5YzMyYzY2MjI2NjZmY2Y3OTBkMGI2ZjQ5ZjMzMDVmMTgxYjhjZjA1OTIzMDc5ZjM5YjMyMjM0MGUxYzk0N2MyNTNiZWQwM2M1YWQxNjliMjQzMWM2MjQ2NmQ5Y2IyNTgwODY4MDdjNGYzMzBmNmYxNmE5ZGJkNzI4ODg5YjBjZWIiLCJ0aW1lU3RhbXAiOjAuMzkxODIyNDY0NTQ0NDU1OSwiZmlyc3RuYW1lIjoiQm9vbnNvbmciLCJsYXN0bmFtZSI6IlNyaXRob25nIiwic2luZ0FkZHJlc3MiOiI0OS40OS4yMTYuMTM5IiwidHlwZSI6ImVtYWlsX2xvZ2luIiwic2NvcmUiOjEsInVzZXJNYWlsIjoiaGV5Ym9vbnNvbmdAZ21haWwuY29tIiwiaWF0IjoxNzY2NDY2MDYwLCJleHAiOjE3NjY0NzY4NjAsImlzcyI6ImNzYXRrMTgifQ.tm1IEZZjjSMOWb5yH4qgVCy3AA6hynaIIs2ZXkLpZiQ",
   START_TIME: null, // e.g., "2025-12-23T00:10:30"
-  // SET WITH API
+  //
   PERFORM_ID: "",
   ROUND_ID: "",
   EVENT_CONSENT: [],
@@ -71,46 +70,6 @@ async function main() {
     }, 10000);
     await new Promise(() => {});
   })();
-
-  // // --- SCHEDULER: Wait if START_TIME is set ---
-  // if (CONFIG.START_TIME) {
-  //   const startTime = new Date(CONFIG.START_TIME).getTime();
-  //   if (!isNaN(startTime)) {
-  //     while (true) {
-  //       const now = new Date().getTime();
-  //       const waitTime = startTime - now;
-
-  //       if (waitTime <= 0) {
-  //         console.log("\nStart time reached! Launching automation...");
-  //         break;
-  //       }
-
-  //       // Calculate hours, minutes, seconds left
-  //       const hours = Math.floor((waitTime / (1000 * 60 * 60)) % 24);
-  //       const minutes = Math.floor((waitTime / (1000 * 60)) % 60);
-  //       const seconds = Math.floor((waitTime / 1000) % 60);
-
-  //       process.stdout.write(
-  //         `\r[Scheduler] Waiting... Time remaining: ${hours}h ${minutes}m ${seconds}s   `
-  //       );
-
-  //       // Wait 1 second before checking again
-  //       await new Promise((resolve) => setTimeout(resolve, 1000));
-  //     }
-  //   } else {
-  //     console.warn("Invalid START_TIME format. Running immediately.");
-  //   }
-  // }
-
-  // while (true) {
-  //   const success = await checkAndReserve();
-  //   if (!success) {
-  //     break;
-  //   }
-
-  //   // Polling interval
-  //   await new Promise((resolve) => setTimeout(resolve, 1000));
-  // }
 }
 
 async function process() {
