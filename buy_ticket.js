@@ -5,7 +5,7 @@ const CONFIG = {
   EVENT_NAME: "SMTOWNLIVE2026inBKK",
   ZONE_ID: "C3",
   COOKIE:
-    "_ga=GA1.2.764019633.1766411747; _gid=GA1.2.2120792405.1766411747; G_ENABLED_IDPS=google; cookieconsent_status=allow; cookies-strictly=true; cookies-performance=false; _gat=1; _ga_ERZFFGWN5D=GS2.2.s1766453782$o3$g1$t1766456111$j60$l0$h843945662; aws-waf-token=314f55ae-578f-4a1b-89ca-b4a38c7a71d8:NQoAqkcOZ+dbAAAA:AoIZUviPspBdr5kHGyDwSqU6RKDbRpO5i7HYytJ7iIm30zpauirSAr6v8YndOk3PGnDcUSHtrINOHYSRyBXGrPbpLoQfjjbzRdYyY8rZ84zCfQ8F26xBbtvPMJGBcsDD87vE0YQbGPskCJp+kpfSJi8Xzq5E9sDptT7Q9fWkIrhKpCyliKklmuBqqUAyqwUaJJbBNGwOEjKPS11lASlUgOOGPzbEI7ZsHjssOW2gUMlsoeEl8RJj78fXI0BhJQFArANeTcPFYj0ixoEEounUlp3stG7Wyg==",
+    "_ga=GA1.2.764019633.1766411747; _gid=GA1.2.2120792405.1766411747; G_ENABLED_IDPS=google; cookieconsent_status=allow; cookies-strictly=true; cookies-performance=false; _ga_ERZFFGWN5D=GS2.2.s1766453782$o3$g1$t1766456285$j57$l0$h843945662; aws-waf-token=314f55ae-578f-4a1b-89ca-b4a38c7a71d8:NQoAbqAPzaxyAAAA:VF5pbxcxJNnvxiJTIaZS0Yg733KwM/J67SKiOG+DsJtRgHjyZ1z5Q+/1R8K80LsAbkxzWVfhqimC3Y3m28DvmLARI3fUx8lpXg+mXui8vF/H6rUsY6cOoY6YlEKAtiQDUPsvtoEeKcXm3o12GHfy9Vgc2JGwxEN37D8RGP/Es1BU3+OFdw7vh4IoKNW87VQ9Ve/Myw4aR5ucsg3qqi5rr/JzlLwIvjGHG5/kh5ORe6IhhNSQH9tEO4WSqt83RG/8EaUG6GfIrVCGQAN8I6dzi4mILjJM+g==",
   TOKEN:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhleWJvb25zb25nQGdtYWlsLmNvbSIsInVybGJhY2siOiJ3d3cuYWxsdGlja2V0LmNvbSIsInBheW1lbnRDaGFubmVsIjoiQzA3IiwidGlja2V0VHlwZSI6IjAxIiwibGFuZyI6IkUiLCJkYXRhIjoiYTk0YTU3NGY3NGJhMWM5MTdiZTA1NGYwYmM5NjI1MDBhOGIyY2U0ODA3ZmYzOGJmNTY2YWYxNGY0MDkzYjcyODU0ZmViMTExMjk2MDg4NmFjNDBjYTk1MjBkOTI4NGEzNzdiYjYxMjU4MWNlY2MzZmVlMjU0OGI0MmM4YTkyYmJiM2QzYWYzMmU5NTg3NzQxYWQzYjE0MTQyODUyZjg3Mzg4YjNjZmRlMDNjZTljNDg2Y2ExODcwMzVlZTU1YjZlNzNkOTc0OTc3Y2VhNGU5MDgxYTliYWNjNDA0YjVmN2QwMjliMGI2Y2Y0YTE0NzA2NjdlZjQzODlkZWUzMGMwNDY0ZmY4NDQwY2RjOGFhOWUyM2MyZmZhYTJiOThhODZjOTU3ZGYxOGEyNDc5YWUzZTVmZmQzMmE5NTI0NGFiZGIwMTEzMDk2ZDQ3ZDAyMWY4MzMxNDFkMmMxODFiYjQ1NTFmN2QyZjU2ZDJhM2NmN2ExY2RkYTI4OWVlOTZkNDU2NTdiZTQyNGMzMmUyOTkzMTA1ZTIyZjlkZjZkODNhMTllOTljZTdjNjU1ZTBjYWUwMmEzMjEzNTgzMTNlOTZlMTU2OTIwNzIyZDUzMzZmYmQzY2RiOTNjZjFiM2Y4YjMyZWVmNzhhZDkzODI4OTFmYzYzNTBjNWM5MDAyMTc4ZTlhZGViNmE2YzYwYmU1MmNlODYwMDYxYWMyZmFhOGI1MzFmMDZiOTZlYmZlMjM0MzQzNDRiNzEzNDVmZTJiZTRkOWU3ZGQxOTY0NzM0MTAyN2JhOGQwNWNjMGFhNDdiYmU5NDgyMjYzMWZiMjQyMDdhNTJiMzFiNDM5YWNiYmY5NzE0ZTYyMzU4NTNhNzBjZTg4NmYyYTk1YjBkZmNkNzRiYTAxNTVhZTM2NGE5Yzk5YzUwZGIxNDJiMjMzMjQyZDM0MTFlNzk5MmNkOWFmOTVlMzZlODUyNGU5YjBkYWRmNTEzZmI3Yjk1YWZhMmY4ZTVjYWI2NDVjNGU0YjgxZTQ3NmEzZGVjMTJkZDQ0NmFlNjVlZDZjZmFlNWQ0NTA0NzkwMWI2YzE4Yjc3N2ExNzU4OWZhNWZkYTE3NzNmZDQ5YTAxMGFjY2NhODY3ZGJhOTJkMDRlMzQxODliMWM1ODk5YzMyYzY2MjI2NjZmY2Y3OTBkMGI2ZjQ5ZjMzMDVmMTgxYjhjZjA1OTIzMDc5ZjM5YjMyMjM0MGUxYzk0N2MyNTNiZWQwM2M1YWQxNjliMjQzMWM2MjQ2NmQ5Y2IyNTgwODY4MDdjNGYzMzBmNmYxNmE5ZGJkNzI4ODg5YjBjZWIiLCJ0aW1lU3RhbXAiOjAuOTAxNTEyMjA5Nzg4NzYyLCJmaXJzdG5hbWUiOiJCb29uc29uZyIsImxhc3RuYW1lIjoiU3JpdGhvbmciLCJzaW5nQWRkcmVzcyI6IjQ5LjQ5LjIxNi4xMzkiLCJ0eXBlIjoiZW1haWxfbG9naW4iLCJzY29yZSI6MSwidXNlck1haWwiOiJoZXlib29uc29uZ0BnbWFpbC5jb20iLCJpYXQiOjE3NjY0NTM4NzQsImV4cCI6MTc2NjQ2NDY3NCwiaXNzIjoiY3NhdGsxOCJ9.2n3y9uPVwu653MHE9PSMCSK5iQQOMq_H2gUE4nmmLnw",
   START_TIME: null, // e.g., "2025-12-23T00:10:30"
@@ -91,7 +91,7 @@ async function checkAndReserve() {
         "Could not fetch rounds or list empty, PERFORM_ID:",
         CONFIG.PERFORM_ID
       );
-      return;
+      return false;
     }
 
     // Step 2: Get Seat
@@ -229,6 +229,7 @@ async function main() {
       "Could not fetch Event ID, using fallback/hardcoded:",
       CONFIG.PERFORM_ID
     );
+
     // We can continue with the hardcoded one if fetch fails, or exit.
     // User asked to 'use' it, so ideally we insist. But fallback is safer.
   }
@@ -269,13 +270,12 @@ async function main() {
 
   while (true) {
     const success = await checkAndReserve();
-    if (success) {
-      console.log("Exiting automation loop (Success).");
-      // break;
+    if (!success) {
+      break;
     }
 
     // Polling interval
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 }
 
