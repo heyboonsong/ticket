@@ -56,7 +56,7 @@ async function main() {
           return;
         }
         CONFIG.COOKIE = cookie;
-        // await process();
+        await process();
       }
     });
 
