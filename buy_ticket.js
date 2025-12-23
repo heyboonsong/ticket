@@ -3,10 +3,10 @@ const cheerio = require("cheerio");
 
 // --- Configuration ---
 const CONFIG = {
-  EVENT_NAME: "WonderOneMusicFestival",
-  ZONE_ID: [],
+  EVENT_NAME: "SMTOWNLIVE2026inBKK",
+  ZONE_ID: ["C3"],
   COOKIE:
-    "_ga=GA1.2.764019633.1766411747; _gid=GA1.2.2120792405.1766411747; G_ENABLED_IDPS=google; cookieconsent_status=allow; cookies-strictly=true; cookies-performance=false; _ga_ERZFFGWN5D=GS2.2.s1766453782$o3$g1$t1766461226$j17$l0$h843945662; aws-waf-token=314f55ae-578f-4a1b-89ca-b4a38c7a71d8:NQoAv7EdOhmKAAAA:agCwBqa1/YMf9mOLF9VtGwRXdZz7DqAliWfJ7VRS6nQpE+1+aGvGz10CwumSFsO3kE5h12Hj52oSLU0ps9fhQb2qjvrnwoZ0Eg4yOIfgSkWx2draPBKId7r0FC7keaLlLP+V3ovp/Wf8RmIBdRYcroMZPfwNMA4RgGv9ujCNW0JY6uEkXLuw1xioCAqIlXGNbegBP8OaPbvtT6iWanlCY9u54lOmxTi/SMw5vTbt1M+Wh/kxAL6vomsktCa22OzTW129oC/rPQRjciI3sW0FewRJllpOUw==",
+    "_ga=GA1.2.764019633.1766411747; _gid=GA1.2.2120792405.1766411747; G_ENABLED_IDPS=google; cookieconsent_status=allow; cookies-strictly=true; cookies-performance=false; _ga_ERZFFGWN5D=GS2.2.s1766463863$o4$g1$t1766464032$j58$l0$h1543206677; aws-waf-token=314f55ae-578f-4a1b-89ca-b4a38c7a71d8:NQoAql4fl48pAAAA:tYEJmymdKOVCd/70dwd8ZIm2w83LSrfN4aFYOq9VkF/gRT5UwSUK7IOLzJzhODlhawWk4M8DlkLcBfZVMYWHFcXC+EHJgpPKulTlckIiseNhOjoYAjrkDMSkvvHNkelKmRC/9ajlAGRmhkKZio5/PSY8pXSmOfWss7OvaSB7ZVvYCL17nWuw03+ev7w5kpQdqcshmqK24aJDMyDaKqflbloqdLkPh+n56Liegq8ndK9FsSZI49QbLxLw2NX86h8P03yLTsG3I/s7BSzCzhdRFv8MPRWFmw==",
   TOKEN:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhleWJvb25zb25nQGdtYWlsLmNvbSIsInVybGJhY2siOiJ3d3cuYWxsdGlja2V0LmNvbSIsInBheW1lbnRDaGFubmVsIjoiQzA3IiwidGlja2V0VHlwZSI6IjAxIiwibGFuZyI6IkUiLCJkYXRhIjoiYTk0YTU3NGY3NGJhMWM5MTdiZTA1NGYwYmM5NjI1MDBhOGIyY2U0ODA3ZmYzOGJmNTY2YWYxNGY0MDkzYjcyODU0ZmViMTExMjk2MDg4NmFjNDBjYTk1MjBkOTI4NGEzNzdiYjYxMjU4MWNlY2MzZmVlMjU0OGI0MmM4YTkyYmJiM2QzYWYzMmU5NTg3NzQxYWQzYjE0MTQyODUyZjg3Mzg4YjNjZmRlMDNjZTljNDg2Y2ExODcwMzVlZTU1YjZlNzNkOTc0OTc3Y2VhNGU5MDgxYTliYWNjNDA0YjVmN2QwMjliMGI2Y2Y0YTE0NzA2NjdlZjQzODlkZWUzMGMwNDY0ZmY4NDQwY2RjOGFhOWUyM2MyZmZhYTJiOThhODZjOTU3ZGYxOGEyNDc5YWUzZTVmZmQzMmE5NTI0NGFiZGIwMTEzMDk2ZDQ3ZDAyMWY4MzMxNDFkMmMxODFiYjQ1NTFmN2QyZjU2ZDJhM2NmN2ExY2RkYTI4OWVlOTZkNDU2NTdiZTQyNGMzMmUyOTkzMTA1ZTIyZjlkZjZkODNhMTllOTljZTdjNjU1ZTBjYWUwMmEzMjEzNTgzMTNlOTZlMTU2OTIwNzIyZDUzMzZmYmQzY2RiOTNjZjFiM2Y4YjMyZWVmNzhhZDkzODI4OTFmYzYzNTBjNWM5MDAyMTc4ZTlhZGViNmE2YzYwYmU1MmNlODYwMDYxYWMyZmFhOGI1MzFmMDZiOTZlYmZlMjM0MzQzNDRiNzEzNDVmZTJiZTRkOWU3ZGQxOTY0NzM0MTAyN2JhOGQwNWNjMGFhNDdiYmU5NDgyMjYzMWZiMjQyMDdhNTJiMzFiNDM5YWNiYmY5NzE0ZTYyMzU4NTNhNzBjZTg4NmYyYTk1YjBkZmNkNzRiYTAxNTVhZTM2NGE5Yzk5YzUwZGIxNDJiMjMzMjQyZDM0MTFlNzk5MmNkOWFmOTVlMzZlODUyNGU5YjBkYWRmNTEzZmI3Yjk1YWZhMmY4ZTVjYWI2NDVjNGU0YjgxZTQ3NmEzZGVjMTJkZDQ0NmFlNjVlZDZjZmFlNWQ0NTA0NzkwMWI2YzE4Yjc3N2ExNzU4OWZhNWZkYTE3NzNmZDQ5YTAxMGFjY2NhODY3ZGJhOTJkMDRlMzQxODliMWM1ODk5YzMyYzY2MjI2NjZmY2Y3OTBkMGI2ZjQ5ZjMzMDVmMTgxYjhjZjA1OTIzMDc5ZjM5YjMyMjM0MGUxYzk0N2MyNTNiZWQwM2M1YWQxNjliMjQzMWM2MjQ2NmQ5Y2IyNTgwODY4MDdjNGYzMzBmNmYxNmE5ZGJkNzI4ODg5YjBjZWIiLCJ0aW1lU3RhbXAiOjAuOTAxNTEyMjA5Nzg4NzYyLCJmaXJzdG5hbWUiOiJCb29uc29uZyIsImxhc3RuYW1lIjoiU3JpdGhvbmciLCJzaW5nQWRkcmVzcyI6IjQ5LjQ5LjIxNi4xMzkiLCJ0eXBlIjoiZW1haWxfbG9naW4iLCJzY29yZSI6MSwidXNlck1haWwiOiJoZXlib29uc29uZ0BnbWFpbC5jb20iLCJpYXQiOjE3NjY0NTM4NzQsImV4cCI6MTc2NjQ2NDY3NCwiaXNzIjoiY3NhdGsxOCJ9.2n3y9uPVwu653MHE9PSMCSK5iQQOMq_H2gUE4nmmLnw",
   START_TIME: null, // e.g., "2025-12-23T00:10:30"
@@ -21,17 +21,18 @@ const CONFIG = {
 async function main() {
   console.log("Starting Ticket Automation (Curl Mode) - Press Ctrl+C to stop");
   try {
-    console.log("Fetching dynamic Event ID...");
     const { event_id, event_consent } = await fetchEventInfo();
+    if (!event_id && !event_consent) {
+      console.log("Failed to fetch Event ID or Consent");
+      return;
+    }
+
     console.log(`Fetched Event ID: ${event_id}`);
-    console.log(`Has Consent: ${event_consent.length > 0}`);
+    console.log(`Has Consent: ${!event_consent ? false : true}`);
     CONFIG.PERFORM_ID = event_id;
-    CONFIG.EVENT_CONSENT = event_consent;
+    CONFIG.EVENT_CONSENT = event_consent ?? [];
   } catch (err) {
-    console.error(
-      "Could not fetch Event ID, using fallback/hardcoded:",
-      CONFIG.PERFORM_ID
-    );
+    console.error("Could not fetch Event ID:", err);
   }
 
   if (!CONFIG.ZONE_ID.length) {
